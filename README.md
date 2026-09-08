@@ -1,73 +1,33 @@
-# Welcome to your Lovable project
+# База Интеллекта — пробный ЕГЭ по химии
 
-## Project info
+Персональный тренажёр для Фоминой Софии на главной странице baseintellect.ru.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+- Авторский вариант: 34 задания, 56 первичных баллов, 210 минут.
+- Автоматическая проверка части 1 с частичными баллами; решения и критерии для части 2.
+- Автосохранение ответов, отметки «на потом», восстановление после перезагрузки.
+- Абсолютный дедлайн, автоматическая сдача при истечении времени.
+- История только в браузере; выгрузка и объединение JSON-истории, печать отчёта / PDF.
+- Справочные таблицы ФИПИ без ответов, базовый калькулятор, адаптивный интерфейс.
 
-## How can I edit this code?
+## Разработка
 
-There are several ways of editing your application.
+Node.js 24 LTS рекомендован. `npm ci`, затем `npm run dev`.
 
-**Use Lovable**
+`npm test` проверяет оценивание, время, перенос данных и полный сценарий работы в DOM-окружении. `npm run lint:chemistry` проверяет новые модули. `npm run build` создаёт статический `dist/`.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+GitHub Actions проверяет и публикует `main` на GitHub Pages. `public/CNAME` сохраняет домен baseintellect.ru. Пользовательские ответы на сервер не отправляются.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Файлы
 
-**Use your preferred IDE**
+- `src/chemistry/bank.js` — задания, ключи, решения и критерии; версия варианта.
+- `src/chemistry/engine.js` — оценивание, дедлайн, валидация резервных копий.
+- `src/chemistry/app.js` — экзамен, история и разбор.
+- `src/chemistry/style.css` — интерфейс, мобильная версия, печать.
+- `docs/chemistry-research.md` — анализ документов 2025–2027, источники, границы модели.
+- `tests/chemistry.test.js` — регрессионные проверки.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Старая React-страница больше не является точкой входа. Существующие зависимости и исходники сохранены для обратимости; в итоговую страницу пробника они не включаются. Все новые функции написаны на HTML/CSS/JavaScript без сервера.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Ограничения
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Это личный учебный тренажёр, а не защищённый экзаменационный сервис: ответы доступны в исходниках. История зависит от данных браузера, поэтому рекомендуется выгружать JSON. При закрытии страницы просроченная попытка фиксируется при следующем открытии с исходным дедлайном. В браузере без Web Locks используйте одну вкладку. Развёрнутую часть проверяет ученица или преподаватель, итог до проверки помечается как неполный. Процент выполнения не равен официальному тестовому баллу ЕГЭ.

@@ -31,6 +31,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Test exam scoring and persistence
+        run: npm test
+
       # Для SPA (React/Vite) на GitHub Pages:
       - name: SPA fallback (404.html)
         run: cp dist/index.html dist/404.html
